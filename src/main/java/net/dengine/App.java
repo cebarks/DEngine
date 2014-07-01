@@ -2,22 +2,30 @@ package net.dengine;
 
 /**
  * Hello world!
- *
+ * 
  */
 public class App {
 	
-    public static void main( String[] args ) {
+	public DEngine engine = new DEngine();
+	
+    public static void main(String[] args) {
     	
-        DEngine.create();
+        new App();
         
-        while(DEngine.isRunning()) {
+    }
+    
+    public App() {
+    	
+    	engine.create();
+        
+        while(engine.isRunning()) {
         	
-        	DEngine.run();
+        	engine.run();
         	
         }
         
-        DEngine.close(0);
-        
+        engine.close(0);
+    	
     }
     
 }
