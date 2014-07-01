@@ -20,6 +20,13 @@
               <artifactId>lwjgl</artifactId>
               <version>${lwjgl.version}</version>
           </dependency>
+		  <dependency>
+		  	<groupId>org.slick2d</groupId>
+		  	<artifactId>slick-util</artifactId>
+		  	<version>1.0.0</version>
+		  	<scope>system</scope>
+		  	<systemPath>${project.basedir}/lib/slick-util.jar</systemPath>
+		  </dependency>
       </dependencies>
 
       <build>
