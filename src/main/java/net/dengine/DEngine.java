@@ -28,31 +28,31 @@ public class DEngine implements Runnable {
 
 	// private List<Level> levels = new ArrayList<Level>();
 
-	public static final Logger logger = LogManager.getLogger(DEngine.class);
+	public static final Logger LOG = LogManager.getLogger(DEngine.class);
 
 	public DEngine() {
-		logger.info("Attempting to create DEngine...");
+		LOG.info("Attempting to create DEngine...");
 
 		try {
 
-			logger.info("Loading levels...");
+			LOG.info("Loading levels...");
 			// levels = loadLevels("null");
-			logger.info("Creating levels...");
+			LOG.info("Creating levels...");
 			// for(Level l : levels) l.create();
 
-			logger.info("Creating display...");
+			LOG.info("Creating display...");
 			Display.setDisplayMode(new DisplayMode(width, height));
 			Display.setTitle(title);
 			Display.create();
 
-			logger.info("Game has been successfully initialized.");
+			LOG.info("Game has been successfully initialized.");
 
 		} catch (Exception e) {
 			closeOnError(0, e);
 		}
 
 		running = true;
-		logger.info("DEngine is running...");
+		LOG.info("DEngine is running...");
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class DEngine implements Runnable {
 	 * Closing method
 	 */
 	public void close(int status) {
-		logger.info("Closing DEngine under status: " + status);
+		LOG.info("Closing DEngine under status: " + status);
 		running = false;
 		// TODO this is where it would go through and destroy all the levels and
 		// variables, and other rendering stuff
@@ -87,7 +87,7 @@ public class DEngine implements Runnable {
 	 * print the error log
 	 */
 	public void closeOnError(int status, Exception exception) {
-		logger.info("Closing DEngine with an error under status: " + status);
+		LOG.info("Closing DEngine with an error under status: " + status);
 		running = false;
 		exception.printStackTrace();
 		// TODO this is where it would go through and destroy all the levels and
