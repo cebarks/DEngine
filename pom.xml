@@ -73,4 +73,9 @@
 			</plugin>
 		</plugins>
 	</build>
+	<description>a Doom-like 3D engine</description>
+	<issueManagement>
+		<system>Github Issues</system>
+		<url>https://github.com/cebarks/DEngine/issues</url>
+	</issueManagement>
 </project>
