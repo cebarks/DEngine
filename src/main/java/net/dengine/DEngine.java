@@ -2,8 +2,8 @@ package net.dengine;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
-
 import net.dengine.vec.Vector3;
+import net.dengine.world.Section;
 import net.dengine.world.Wall;
 import net.dengine.world.World;
 import net.dengine.world.entity.EntityPlayer;
@@ -136,7 +136,9 @@ public class DEngine implements Runnable {
 
 	private World loadWorld(String file) {
 		World world = new World(this, "foo");
-		new Wall(world, new Vector3(0, 50, 0), new Vector3(50, 100, 0), 30);
+		Section section = new Section(world);
+		new Wall(section, new Vector3(0, 50, 0), new Vector3(50, 100, 0), 30);
+		world.addSection(section);
 		return world;
 	}
 

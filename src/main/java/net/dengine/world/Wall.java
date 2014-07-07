@@ -15,17 +15,17 @@ public class Wall {
 	
 	public float height;
 	
-	private World world;
+	private Section section;
 
-	public Wall(World world, Vector3 start, Vector3 end, float height) {
+	public Wall(Section section, Vector3 start, Vector3 end, float height) {
 		
-		this.world = world;
+		this.section = section;
 		this.start = start;
 		this.end = end;
 		this.height = height;
-		this.id = world.getNextEntityID();
+		this.id = section.getWorld().getNextEntityID();
 		
-		world.addWall(this);
+		section.addWall(this);
 		normalize();
 		
 	}

@@ -10,7 +10,7 @@ public class World {
 	private final DEngine engine;
 
 	private List<Entity> entities;
-	private List<Wall> walls;
+	private List<Section> sections;
 	private int idIndex;
 
 	public World(DEngine engine, String name) {
@@ -18,20 +18,25 @@ public class World {
 
 		idIndex = 0;
 
-		walls = new ArrayList<Wall>();
+		sections = new ArrayList<Section>();
 		entities = new ArrayList<Entity>();
+	}
+	
+	public void create() {
+		for(Section s : sections)
+			s.create();
 	}
 
 	public void render3D() {
-		for (Wall w : walls)
-			w.render3D();
+		for (Section s : sections)
+			s.render3D();
 		for (Entity e : entities)
 			e.render3D();
 	}
 
 	public void render2D() {
-		for (Wall w : walls)
-			w.render2D();
+		for (Section s : sections)
+			s.render2D();
 		for (Entity e : entities)
 			e.render2D();
 	}
@@ -48,16 +53,16 @@ public class World {
 		entities.add(entity);
 	}
 
-	public void addWall(Wall wall) {
-		walls.add(wall);
+	public void addSection(Section section) {
+		sections.add(section);
 	}
 
 	public Entity getEntity(int index) {
 		return entities.get(index);
 	}
 	
-	public Wall getWall(int index) {
-		return walls.get(index);
+	public Section getSection(int index) {
+		return sections.get(index);
 	}
 
 	public void update() {
