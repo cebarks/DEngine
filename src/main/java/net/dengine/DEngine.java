@@ -3,6 +3,8 @@ package net.dengine;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.dengine.world.World;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
@@ -26,7 +28,7 @@ public class DEngine implements Runnable {
 
 	private int exitStatus;
 
-	// private List<Level> levels = new ArrayList<Level>();
+	// private List<World> levels = new ArrayList<World>();
 
 	public static final Logger LOG = LogManager.getLogger(DEngine.class);
 
@@ -36,9 +38,9 @@ public class DEngine implements Runnable {
 		try {
 
 			LOG.info("Loading levels...");
-			// levels = loadLevels("null");
+			// levels = loadWorlds("null");
 			LOG.info("Creating levels...");
-			// for(Level l : levels) l.create();
+			// for(World l : levels) l.create();
 
 			LOG.info("Creating display...");
 			Display.setDisplayMode(new DisplayMode(width, height));
@@ -108,9 +110,9 @@ public class DEngine implements Runnable {
 	}
 
 	// TODO THIS IS WHERE YOU COME IN
-	private List<Level> loadLevels(String file) {
+	private List<World> loadWorlds(String file) {
 		// TODO This is where we get levels
-		List<Level> levels = new ArrayList<Level>();
+		List<World> levels = new ArrayList<World>();
 
 		return levels;
 	}
