@@ -8,7 +8,7 @@ public class Entity {
 	public float y;
 	public float z;
 
-	private World world;
+	protected final World world;
 
 	private final int id;
 
@@ -26,7 +26,23 @@ public class Entity {
 		this(world, 0F, 0F, 0F);
 	}
 
+	public void update() {
+
+	}
+
 	public int getID() {
 		return id;
+	}
+
+	public void render3D() {
+
+	}
+
+	public void render2D() {
+
+	}
+
+	public World getWorld() {
+		return world;
 	}
 }
