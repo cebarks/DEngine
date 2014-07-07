@@ -68,4 +68,11 @@ public class Vector3 {
 	public float magnitude() {
 		return (float) Math.sqrt((x * x) + (y * y) + (z * z));
 	}
+
+	public Vector3 cross(Vector3 v) {
+		float crossX = y * v.z - v.y * z;
+		float crossY = z * v.x - v.z * x;
+		float crossZ = x * v.y - v.x * y;
+		return new Vector3(crossX, crossY, crossZ);
+	}
 }

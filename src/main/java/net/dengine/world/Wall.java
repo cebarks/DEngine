@@ -1,22 +1,17 @@
 package net.dengine.world;
 
-import net.dengine.vec.Line;
-import net.dengine.vec.Vector;
+import net.dengine.vec.Vector3;
 
 public class Wall {
-	
-	public Line line;
-	
-	public Wall(Vector v1, Vector v2) {
-		
-		line = new Line(v1, v2);
-		
-	}
-	
-	public Wall(Line line) {
-		
-		this.line = line;
-		
+
+	public final Vector3 v1;
+	public final Vector3 v2;
+	public final float height;
+
+	public Wall(Vector3 v1, Vector3 v2, float height) {
+		this.v1 = v1;
+		this.v2 = v2;
+		this.height = height;
 	}
 
 }
