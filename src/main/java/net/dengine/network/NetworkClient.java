@@ -46,6 +46,8 @@ public class NetworkClient implements Runnable {
 				case INVALID:
 					LOG.error("Recieved invalid packet... Discarding.");
 					break;
+				case PING:
+					LOG.info("Got ping from server!");
 				}
 			}
 
@@ -57,7 +59,8 @@ public class NetworkClient implements Runnable {
 	/**
 	 * Sends the provided {@link Packet} to the server.
 	 * 
-	 * @param packet - the packet to send
+	 * @param packet
+	 *            - the packet to send
 	 */
 	public void sendPacket(Packet packet) {
 		DatagramPacket dataPacket = new DatagramPacket(packet.getBytes(), packet.getBytes().length);

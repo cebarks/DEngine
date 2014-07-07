@@ -51,6 +51,10 @@ public class NetworkServer implements Runnable {
 					LOG.error("Recieved invalid packet... Discarding.");
 					break;
 				case PING:
+					LOG.info("Got ping packet from: " + packet.getAddress().getHostAddress());
+					LOG.info("Sending reply...");
+					Packet01Ping pingPacket = new Packet01Ping(true);
+					socket.send(new DatagramPacket(pingPacket.getBytes(), pingPacket.getBytes().length, packet.getSocketAddress()));
 					break;
 				case LOGIN:
 					break;
@@ -62,13 +66,13 @@ public class NetworkServer implements Runnable {
 		}
 	}
 
-	
 	/**
 	 * Sends the given {@link Packet} to all clients connected.
 	 * 
-	 * @param packet - the packet to be sent
+	 * @param packet
+	 *            - the packet to be sent
 	 */
-	public void sendPacket(Packet packet) {
+	public void sendPacket(Packet packet, ServerConnection connection) {
 		for (ServerConnection con : connections) {
 			try {
 				socket.send(new DatagramPacket(packet.getBytes(), packet.getBytes().length, con.socketAddress));
@@ -81,7 +85,8 @@ public class NetworkServer implements Runnable {
 	/**
 	 * Lookup a {@link ServerConnection} from the given connection name.
 	 * 
-	 * @param name - name of connection
+	 * @param name
+	 *            - name of connection
 	 * @return the connection or null if no connections exist with given name
 	 */
 	public ServerConnection lookupConnectionByName(String name) {
