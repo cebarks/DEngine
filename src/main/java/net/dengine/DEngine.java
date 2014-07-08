@@ -51,7 +51,7 @@ public class DEngine implements Runnable {
 			Mouse.setGrabbed(true);
 
 			LOG.info("Creating player...");
-			world.addEntity(new EntityPlayer(world, "Tester"));
+			world.setLocalPlayer(new EntityPlayer(world, "Tester"));
 
 			LOG.info("Game has been successfully initialized.");
 

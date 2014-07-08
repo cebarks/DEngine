@@ -5,11 +5,15 @@ import java.util.List;
 
 import net.dengine.DEngine;
 import net.dengine.world.entity.Entity;
+import net.dengine.world.entity.EntityPlayer;
 
 public class World {
 	private final DEngine engine;
 
 	private List<Entity> entities;
+	
+	private EntityPlayer localPlayer;
+	
 	private List<Section> sections;
 	private int idIndex;
 
@@ -68,5 +72,14 @@ public class World {
 	public void update() {
 		for (Entity e : entities)
 			e.update();
+		localPlayer.inputUpdate();
+	}
+
+	public void setLocalPlayer(EntityPlayer entityPlayer) {
+		this.localPlayer = entityPlayer;
+	}
+	
+	public EntityPlayer getLocalPlayer() {
+		return localPlayer;
 	}
 }
