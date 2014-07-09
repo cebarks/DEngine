@@ -56,7 +56,7 @@ public class DEngine implements Runnable {
 			LOG.info("Game has been successfully initialized.");
 
 		} catch (Exception e) {
-			closeOnError(0, e);
+			exitOnError(0, e);
 		}
 
 		while (running) {
@@ -112,16 +112,15 @@ public class DEngine implements Runnable {
 		glPopMatrix();
 	}
 
-	public void close(int status) {
-		LOG.info("Closing DEngine under status: " + status);
+	public void exit(int status) {
+		LOG.fatal("Closing DEngine under status: " + status);
 		running = false;
 		exitStatus = status;
 	}
 
-	public void closeOnError(int status, Exception exception) {
-		LOG.info("Closing DEngine with an error under status: " + status);
+	public void exitOnError(int status, Exception exception) {
+		LOG.fatal("Closing DEngine with an error under status:", exception);
 		running = false;
-		exception.printStackTrace();
 		exitStatus = status;
 	}
 

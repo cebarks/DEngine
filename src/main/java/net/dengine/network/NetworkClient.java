@@ -20,7 +20,7 @@ public class NetworkClient implements Runnable {
 		try {
 			socket = new DatagramSocket(port, InetAddress.getByName(hostname));
 		} catch (Exception e) {
-			engine.closeOnError(1, e);
+			engine.exitOnError(1, e);
 		}
 
 		this.engine = engine;
@@ -52,7 +52,7 @@ public class NetworkClient implements Runnable {
 			}
 
 		} catch (Exception e) {
-			engine.closeOnError(1, e);
+			engine.exitOnError(1, e);
 		}
 	}
 

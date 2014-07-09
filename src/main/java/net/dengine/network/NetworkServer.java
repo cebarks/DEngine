@@ -22,7 +22,7 @@ public class NetworkServer implements Runnable {
 		try {
 			socket = new DatagramSocket(port);
 		} catch (Exception e) {
-			engine.closeOnError(1, e);
+			engine.exitOnError(1, e);
 		}
 
 		this.connections = new ArrayList<ServerConnection>();
@@ -62,7 +62,7 @@ public class NetworkServer implements Runnable {
 			}
 
 		} catch (Exception e) {
-			engine.closeOnError(1, e);
+			engine.exitOnError(1, e);
 		}
 	}
 
