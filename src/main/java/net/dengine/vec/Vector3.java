@@ -36,16 +36,6 @@ public class Vector3 {
 		length = length();
 	}
 
-	/**
-	 * Constructor for an empty vector: x, y, and z are set to 0.
-	 */
-
-	public Vector3() {
-		x = 0f;
-		y = 0f;
-		z = 0f;
-	}
-
 	public Vector3 add(Vector3 v) {
 		return new Vector3(x + v.x, y + v.y, z + v.z);
 	}
@@ -83,5 +73,9 @@ public class Vector3 {
 		float crossY = z * v.x - v.z * x;
 		float crossZ = x * v.y - v.x * y;
 		return new Vector3(crossX, crossY, crossZ);
+	}
+	
+	public Vector3 invert() {
+		return new Vector3(z, -y, x);
 	}
 }

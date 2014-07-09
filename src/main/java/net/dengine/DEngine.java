@@ -134,14 +134,6 @@ public class DEngine implements Runnable {
 		this.fov = fov;
 	}
 
-	private World loadWorld(String file) {
-		World world = new World(this, "foo");
-		Section section = new Section(world);
-		new Wall(section, new Vector3(0, 50, 0), new Vector3(50, 100, 0), 30);
-		world.addSection(section);
-		return world;
-	}
-
 	public boolean isRunning() {
 		return running;
 	}
@@ -150,5 +142,14 @@ public class DEngine implements Runnable {
 		running = true;
 		controlThread = new Thread(this);
 		controlThread.start();
+	}
+	
+	private World loadWorld(String file) {
+		World world = new World(this, "foo");
+		Section section = new Section(world);
+		new Wall(section, new Vector3(50, 0, 50), new Vector3(25, 0, 100), 25);
+		new Wall(section, new Vector3(-50, 20, -50), new Vector3(-50, -30, -100), 25);
+		world.addSection(section);
+		return world;
 	}
 }
