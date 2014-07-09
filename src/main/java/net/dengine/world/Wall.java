@@ -19,7 +19,7 @@ public class Wall {
 
 	public Vector3 normal, center;
 
-	public float height;
+	public final float height;
 
 	private Section section;
 
@@ -68,16 +68,11 @@ public class Wall {
 	}
 
 	private void normalize() {
-		center = new Vector3((end.x + start.x) / 2,  ((start.y + end.y) / 2) + (height/2), (end.z + start.z) / 2);
+		center = new Vector3((end.x + start.x) / 2, ((start.y + end.y) / 2) + (height / 2), (end.z + start.z) / 2);
 		LOG.info("Creating a wall with center: X: " + center.x + ". Y: " + center.y + ". Z:" + center.z);
 		Vector3 directing = start.sub(end);
 		Vector3 flipped = directing.invert();
 		normal = new Vector3(flipped.x / flipped.length, flipped.y / flipped.length, flipped.z / flipped.length);
-	
-//		center = new Vector3((start.x + end.x) / 2, ((start.y + end.y) / 2) + (height/2), (start.z + end.z) / 2);
-//		LOG.info("Creating a wall with center: X: " + center.x + ". Y: " + center.y + ". Z:" + center.z);
-//		Vector3 dir = start.sub(end).invert();
-//		normal = new Vector3(dir.x/dir.length,dir.x/dir.length,dir.x/dir.length);
-//		LOG.info("Creating a wall with normal: X: " + normal.x + ". Y: " + normal.y + ". Z:" + normal.z);
+		LOG.info("Creating a wall with normal: X: " + normal.x + ". Y: " + normal.y + ". Z:" + normal.z);
 	}
 }

@@ -18,6 +18,7 @@ public class Vector3 {
 	 * The length component of the vector.
 	 */
 	public float length;
+
 	/**
 	 * Constructor for a 3D vector.
 	 *
@@ -32,7 +33,7 @@ public class Vector3 {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		
+
 		length = length();
 	}
 
@@ -51,9 +52,9 @@ public class Vector3 {
 	public Vector3 div(Vector3 v) {
 		return new Vector3(x / v.x, y / v.y, z / v.z);
 	}
-	
+
 	public float length() {
-		 return (float) Math.sqrt((x * x) + (y * y));
+		return (float) Math.sqrt((x * x) + (y * y));
 	}
 
 	public void normalize() {
@@ -74,7 +75,7 @@ public class Vector3 {
 		float crossZ = x * v.y - v.x * y;
 		return new Vector3(crossX, crossY, crossZ);
 	}
-	
+
 	public Vector3 invert() {
 		return new Vector3(z, -y, x);
 	}

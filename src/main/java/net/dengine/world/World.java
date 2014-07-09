@@ -11,23 +11,26 @@ public class World {
 	private final DEngine engine;
 
 	private List<Entity> entities;
-	
+
 	private EntityPlayer localPlayer;
-	
+
 	private List<Section> sections;
 	private int idIndex;
 
+	private String name;
+
 	public World(DEngine engine, String name) {
 		this.engine = engine;
+		this.name = name;
 
 		idIndex = 0;
 
 		sections = new ArrayList<Section>();
 		entities = new ArrayList<Entity>();
 	}
-	
+
 	public void create() {
-		for(Section s : sections)
+		for (Section s : sections)
 			s.create();
 	}
 
@@ -64,7 +67,7 @@ public class World {
 	public Entity getEntity(int index) {
 		return entities.get(index);
 	}
-	
+
 	public Section getSection(int index) {
 		return sections.get(index);
 	}
@@ -78,7 +81,7 @@ public class World {
 	public void setLocalPlayer(EntityPlayer entityPlayer) {
 		this.localPlayer = entityPlayer;
 	}
-	
+
 	public EntityPlayer getLocalPlayer() {
 		return localPlayer;
 	}
