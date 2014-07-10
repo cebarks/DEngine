@@ -51,12 +51,12 @@ public class DEngine implements Runnable {
 			Mouse.setGrabbed(true);
 
 			LOG.info("Creating player...");
-			world.addEntity(new EntityPlayer(world, "Tester"));
+			world.setLocalPlayer(new EntityPlayer(world, "Tester"));
 
 			LOG.info("Game has been successfully initialized.");
 
 		} catch (Exception e) {
-			closeOnError(0, e);
+			exitOnError(0, e);
 		}
 
 		while (running) {
@@ -112,16 +112,15 @@ public class DEngine implements Runnable {
 		glPopMatrix();
 	}
 
-	public void close(int status) {
-		LOG.info("Closing DEngine under status: " + status);
+	public void exit(int status) {
+		LOG.fatal("Closing DEngine under status: " + status);
 		running = false;
 		exitStatus = status;
 	}
 
-	public void closeOnError(int status, Exception exception) {
-		LOG.info("Closing DEngine with an error under status: " + status);
+	public void exitOnError(int status, Exception exception) {
+		LOG.fatal("Closing DEngine with an error under status:", exception);
 		running = false;
-		exception.printStackTrace();
 		exitStatus = status;
 	}
 
@@ -134,14 +133,6 @@ public class DEngine implements Runnable {
 		this.fov = fov;
 	}
 
-	private World loadWorld(String file) {
-		World world = new World(this, "foo");
-		Section section = new Section(world);
-		new Wall(section, new Vector3(0, 50, 0), new Vector3(50, 100, 0), 30);
-		world.addSection(section);
-		return world;
-	}
-
 	public boolean isRunning() {
 		return running;
 	}
@@ -150,5 +141,14 @@ public class DEngine implements Runnable {
 		running = true;
 		controlThread = new Thread(this);
 		controlThread.start();
+	}
+	
+	private World loadWorld(String file) {
+		World world = new World(this, "foo");
+		Section section = new Section(world);
+		new Wall(section, new Vector3(50, 0, 50), new Vector3(25, 0, 100), 25);
+		new Wall(section, new Vector3(-50, 20, -50), new Vector3(-50, -30, -100), 25);
+		world.addSection(section);
+		return world;
 	}
 }
