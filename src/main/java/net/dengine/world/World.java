@@ -85,4 +85,16 @@ public class World {
 	public EntityPlayer getLocalPlayer() {
 		return localPlayer;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public List<Section> getSections() {
+		return sections;
+	}
+
+	public List<Entity> getEntities() {
+		return entities;
+	}
 }

@@ -2,10 +2,14 @@ package net.dengine;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
+
+import java.io.File;
+
 import net.dengine.vec.Vector3;
 import net.dengine.world.Section;
 import net.dengine.world.Wall;
 import net.dengine.world.World;
+import net.dengine.world.WorldSaveFile;
 import net.dengine.world.entity.EntityPlayer;
 
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +22,7 @@ import org.lwjgl.opengl.DisplayMode;
 public class DEngine implements Runnable {
 
 	private boolean running = false;
-	
+
 	private String title = "DEngine demo";
 
 	private int width = 800, height = 600, fps = 60;
@@ -33,6 +37,12 @@ public class DEngine implements Runnable {
 
 	public static final Logger LOG = LogManager.getLogger(DEngine.class);
 
+	public static DEngine INSTANCE;
+
+	public DEngine() {
+		INSTANCE = this;
+	}
+
 	public void run() {
 
 		LOG.info("Attempting to create DEngine...");
@@ -40,7 +50,10 @@ public class DEngine implements Runnable {
 		try {
 
 			LOG.info("Loading levels...");
-			world = loadWorld("null");
+			if (new File("foo").exists())
+				world = loadWorld("foo");
+			else
+				world = loadDefaultWorld();
 			LOG.info("Creating levels...");
 			// for(World w : worlds) w.create();
 
@@ -54,7 +67,6 @@ public class DEngine implements Runnable {
 			world.setLocalPlayer(new EntityPlayer(world, "Tester"));
 
 			LOG.info("Game has been successfully initialized.");
-
 		} catch (Exception e) {
 			exitOnError(0, e);
 		}
@@ -67,6 +79,11 @@ public class DEngine implements Runnable {
 			if (Display.isCloseRequested())
 				running = false;
 		}
+
+		LOG.info("Saving world...");
+		WorldSaveFile saveFile = new WorldSaveFile(this, world);
+		saveFile.saveWorld();
+		LOG.info("World saved.");
 
 		Display.destroy();
 		System.exit(exitStatus);
@@ -89,7 +106,7 @@ public class DEngine implements Runnable {
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 
-		EntityPlayer player = (EntityPlayer) world.getEntity(0);
+		EntityPlayer player = world.getLocalPlayer();
 		glRotatef(player.getRotation().y, 0, 1, 0);
 		glTranslatef(-player.getPosition().x, -player.getPosition().y, player.getPosition().z);
 
@@ -142,13 +159,23 @@ public class DEngine implements Runnable {
 		controlThread = new Thread(this);
 		controlThread.start();
 	}
-	
-	private World loadWorld(String file) {
+
+	public World loadWorld(String file) {
+		WorldSaveFile saveFile = new WorldSaveFile(this, new File(file));
+		saveFile.loadWorld();
+		return saveFile.getWorld();
+	}
+
+	public World loadDefaultWorld() {
 		World world = new World(this, "foo");
 		Section section = new Section(world);
 		new Wall(section, new Vector3(50, 0, 50), new Vector3(25, 0, 100), 25);
 		new Wall(section, new Vector3(-50, 20, -50), new Vector3(-50, -30, -100), 25);
 		world.addSection(section);
+		return world;
+	}
+
+	public World getWorld() {
 		return world;
 	}
 }

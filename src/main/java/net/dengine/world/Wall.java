@@ -1,5 +1,6 @@
 package net.dengine.world;
 
+import static net.dengine.DEngine.LOG;
 import static org.lwjgl.opengl.GL11.GL_LINES;
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.glBegin;
@@ -9,19 +10,18 @@ import static org.lwjgl.opengl.GL11.glVertex2f;
 import static org.lwjgl.opengl.GL11.glVertex3f;
 import net.dengine.vec.Vector3;
 
-import static net.dengine.DEngine.LOG;
-
 public class Wall {
 
-	public final Vector3 start, end;
+	public final Vector3 start;
+	public final Vector3 end;
+	public Vector3 normal;
+	public Vector3 center;
 
 	private final int id;
 
-	public Vector3 normal, center;
-
 	public final float height;
 
-	private Section section;
+	private final Section section;
 
 	public Wall(Section section, Vector3 start, Vector3 end, float height) {
 		this.section = section;

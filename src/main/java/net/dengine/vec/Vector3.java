@@ -1,6 +1,9 @@
 package net.dengine.vec;
 
-public class Vector3 {
+import java.io.Serializable;
+
+public class Vector3 implements Serializable {
+	private static final long serialVersionUID = -3369221176499069534L;
 
 	/**
 	 * The x component of the vector.
@@ -54,7 +57,7 @@ public class Vector3 {
 	}
 
 	public float length() {
-		return (float) Math.sqrt((x * x) + (y * y));
+		return (float) Math.sqrt((x * x) + (y * y) + (z * z));
 	}
 
 	public void normalize() {

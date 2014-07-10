@@ -1,5 +1,7 @@
 package net.dengine.world.entity;
 
+
+import net.dengine.world.Section;
 import net.dengine.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -9,7 +11,7 @@ import org.lwjgl.opengl.Display;
 public class EntityPlayer extends EntityLiving {
 
 	private String name;
-
+	
 	public EntityPlayer(World world, String name) {
 		super(world);
 		this.name = name;
