@@ -51,12 +51,6 @@
 			<artifactId>lwjgl_util</artifactId>
 			<version>2.9.1</version>
 		</dependency>
-
-		<dependency>
-			<groupId>com.google.protobuf</groupId>
-			<artifactId>protobuf-java</artifactId>
-			<version>2.5.0</version>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -85,51 +79,9 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<plugin>
-				<groupId>com.google.protobuf.tools</groupId>
-				<artifactId>maven-protoc-plugin</artifactId>
-				<version>0.3.2</version>
-				<configuration>
-					<protocExecutable>${protoc.location}</protocExecutable>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>testCompile</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 
 	</build>
-	<profiles>
-		<profile>
-			<id>windows</id>
-			<activation>
-				<os>
-					<family>windows</family>
-				</os>
-			</activation>
-			<properties>
-				<protoc.location>${project.basedir}/lib/protoc.exe</protoc.location>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>mac</id>
-			<activation>
-				<os>
-					<family>mac</family>
-				</os>
-			</activation>
-			<properties>
-				<protoc.location>${project.basedir}/lib/protoc</protoc.location>
-			</properties>
-		</profile>
-	</profiles>
 
 	<description>a Doom-like 3D engine</description>
 	<issueManagement>
