@@ -12,6 +12,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>protoc-plugin</id>
+			<url>http://sergei-ivanov.github.com/maven-protoc-plugin/repo/releases/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.lwjgl.lwjgl</groupId>
@@ -78,8 +85,52 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>com.google.protobuf.tools</groupId>
+				<artifactId>maven-protoc-plugin</artifactId>
+				<version>0.3.2</version>
+				<configuration>
+					<protocExecutable>${protoc.location}</protocExecutable>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+
 	</build>
+	<profiles>
+		<profile>
+			<id>windows</id>
+			<activation>
+				<os>
+					<family>windows</family>
+				</os>
+			</activation>
+			<properties>
+				<protoc.location>${project.basedir}/lib/protoc.exe</protoc.location>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>mac</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+			<properties>
+				<protoc.location>${project.basedir}/lib/protoc</protoc.location>
+			</properties>
+		</profile>
+	</profiles>
+
 	<description>a Doom-like 3D engine</description>
 	<issueManagement>
 		<system>Github Issues</system>
