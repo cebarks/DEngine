@@ -1,0 +1,10 @@
+package net.dengine.network;
+
+message Packet01Ping {
+	required PacketType type = 1;
+	required bool isReturning = 2;
+}
+
+enum PacketType {
+	PING = 1;
+}
