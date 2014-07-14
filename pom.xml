@@ -12,13 +12,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>protoc-plugin</id>
-			<url>http://sergei-ivanov.github.com/maven-protoc-plugin/repo/releases/</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.lwjgl.lwjgl</groupId>
