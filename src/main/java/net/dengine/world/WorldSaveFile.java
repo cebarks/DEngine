@@ -11,13 +11,10 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import net.dengine.DEngine;
 import net.dengine.vec.Vector3;
 import net.dengine.world.entity.Entity;
-import net.dengine.world.entity.EntityPlayer;
 
 public class WorldSaveFile implements Externalizable {
 

@@ -1,7 +1,6 @@
 package net.dengine.world.entity;
 
 
-import net.dengine.world.Section;
 import net.dengine.world.World;
 
 import org.lwjgl.input.Keyboard;

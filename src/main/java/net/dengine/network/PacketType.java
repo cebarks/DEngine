@@ -1,7 +1,7 @@
 package net.dengine.network;
 
 public enum PacketType {
-	INVALID(00), PING(01), LOGIN(02);
+	INVALID(0xFF), LOGIN(0x00), PING(0x01);
 
 	public final byte ID;
 
