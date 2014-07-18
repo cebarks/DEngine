@@ -125,7 +125,7 @@ public class WorldSaveFile implements Externalizable {
 			Section section = new Section(world);
 
 			for (int j = 0; j < wallCount; j++) {
-				new Wall(section, (Vector3) in.readObject(), (Vector3) in.readObject(), in.readFloat());
+				//new Wall(section, (Vector3) in.readObject(), (Vector3) in.readObject(), in.readFloat());
 			}
 
 			/*int entityCount = in.readInt();

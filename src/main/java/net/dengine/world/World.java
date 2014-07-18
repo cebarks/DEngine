@@ -73,9 +73,9 @@ public class World {
 	}
 
 	public void update() {
+		localPlayer.inputUpdate();
 		for (Entity e : entities)
 			e.update();
-		localPlayer.inputUpdate();
 	}
 
 	public void setLocalPlayer(EntityPlayer entityPlayer) {

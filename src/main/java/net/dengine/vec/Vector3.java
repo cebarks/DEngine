@@ -60,12 +60,9 @@ public class Vector3 implements Serializable {
 		return (float) Math.sqrt((x * x) + (y * y) + (z * z));
 	}
 
-	public void normalize() {
+	public Vector3 normalize() {
 		float m = magnitude();
-
-		x /= m;
-		y /= m;
-		z /= m;
+		return new Vector3(x / m, y / m, z / m);
 	}
 
 	public float magnitude() {
@@ -81,5 +78,13 @@ public class Vector3 implements Serializable {
 
 	public Vector3 invert() {
 		return new Vector3(z, -y, x);
+	}
+	
+	public Vector3 negative() {
+		return new Vector3(-x, -y, -z);
+	}
+	
+	public String toString() {
+		return "x : " + x + ". y : " + y + ". z : " + z;
 	}
 }
