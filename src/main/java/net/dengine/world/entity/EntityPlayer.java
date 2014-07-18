@@ -1,9 +1,12 @@
 package net.dengine.world.entity;
 
 
+<<<<<<< HEAD
 import net.dengine.vec.Vector3;
 import net.dengine.world.Section;
 import net.dengine.world.Wall;
+=======
+>>>>>>> 2e5ef9bf5539aa89cfc84028a970de42c3844f3d
 import net.dengine.world.World;
 
 import org.lwjgl.input.Keyboard;
