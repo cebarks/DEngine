@@ -78,4 +78,8 @@ public class Wall {
 	public float getLength() {
 		return length;
 	}
+	
+	public float getHeight() {
+		return height;
+	}
 }

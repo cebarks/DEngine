@@ -62,20 +62,20 @@ public class Section {
 				vertexBuffer.put(w.end.x);		vertexBuffer.put(w.end.y + w.height);		vertexBuffer.put(w.end.z); 	//x y z
 				vertexBuffer.put(w.start.x);	vertexBuffer.put(w.start.y + w.height);		vertexBuffer.put(w.start.z); 	//x y z 
 			
-				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z); 	//r g b
-				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z); 	//r g b
-				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z); 	//r g b
-				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z);	//r g b
-				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z); 	//r g b
-				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z); 	//r g b
+				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z); 	//r g b a
+				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z); 	//r g b a
+				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z); 	//r g b a
+				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z);		//r g b a
+				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z); 	//r g b a
+				colorBuffer.put(w.color.x);		colorBuffer.put(w.color.y);					colorBuffer.put(w.color.z); 	//r g b a
 				
 				
-				textureBuffer.put(0);			textureBuffer.put(0);													//u v
-				textureBuffer.put(0);			textureBuffer.put(1);													//u v
-				textureBuffer.put(1);			textureBuffer.put(1);													//u v
-				textureBuffer.put(1);			textureBuffer.put(1);													//u v
-				textureBuffer.put(1);			textureBuffer.put(0);													//u v
-				textureBuffer.put(0);			textureBuffer.put(0);													//u v
+				textureBuffer.put(0);									textureBuffer.put(0);																	//u v
+				textureBuffer.put(0);									textureBuffer.put(1 * (w.getHeight() / 16));													//u v
+				textureBuffer.put(1 * (w.getLength() / 16));			textureBuffer.put(1 * (w.getHeight() / 16));													//u v
+				textureBuffer.put(1 * (w.getLength() / 16));			textureBuffer.put(1 * (w.getHeight() / 16));													//u v
+				textureBuffer.put(1 * (w.getLength() / 16));			textureBuffer.put(0);																	//u v
+				textureBuffer.put(0);									textureBuffer.put(0);																	//u v
 			}
 			
 			vertexBuffer.flip();
@@ -112,8 +112,9 @@ public class Section {
 
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
 
-		glDrawArrays(GL_TRIANGLES, 0, 32);
+		glDrawArrays(GL_TRIANGLES, 0, walls.size() * 6);
 
 		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
