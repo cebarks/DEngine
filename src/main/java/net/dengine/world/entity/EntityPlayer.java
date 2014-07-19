@@ -1,6 +1,9 @@
 package net.dengine.world.entity;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5bafe739726af417cf1f6622a77bb694fce0f128
 import net.dengine.vec.Vector3;
 import net.dengine.world.Section;
 import net.dengine.world.Wall;
