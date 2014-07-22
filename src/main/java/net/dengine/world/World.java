@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.dengine.DEngine;
 import net.dengine.world.entity.Entity;
+import net.dengine.world.entity.EntityLiving;
 import net.dengine.world.entity.EntityPlayer;
 
 public class World {
@@ -82,7 +83,7 @@ public class World {
 		this.localPlayer = entityPlayer;
 	}
 
-	public EntityPlayer getLocalPlayer() {
+	public EntityLiving getLocalPlayer() {
 		return localPlayer;
 	}
 

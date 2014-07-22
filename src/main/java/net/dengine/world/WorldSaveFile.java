@@ -13,7 +13,6 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
 import net.dengine.DEngine;
-import net.dengine.vec.Vector3;
 import net.dengine.world.entity.Entity;
 
 public class WorldSaveFile implements Externalizable {
@@ -98,14 +97,11 @@ public class WorldSaveFile implements Externalizable {
 				out.writeFloat(w.height);
 			}
 
-			/*out.writeInt(s.getEntites().size());
-			for (Entity e : s.getEntites()) {
-				if (e.equals(player))
-					out.writeBoolean(true);
-				else
-					out.writeBoolean(false);
-				e.save(out);
-			}*/
+			/*
+			 * out.writeInt(s.getEntites().size()); for (Entity e :
+			 * s.getEntites()) { if (e.equals(player)) out.writeBoolean(true);
+			 * else out.writeBoolean(false); e.save(out); }
+			 */
 		}
 
 	}
@@ -122,17 +118,17 @@ public class WorldSaveFile implements Externalizable {
 			Section section = new Section(world);
 
 			for (int j = 0; j < wallCount; j++) {
-				//new Wall(section, (Vector3) in.readObject(), (Vector3) in.readObject(), in.readFloat());
+				// new Wall(section, (Vector3) in.readObject(), (Vector3)
+				// in.readObject(), in.readFloat());
 			}
 
-			/*int entityCount = in.readInt();
-
-			for (int j = 0; j < entityCount; j++) {
-				Entity e = new Entity(section);
-				if (in.readBoolean())
-					world.setLocalPlayer((EntityPlayer) e);
-				e.load(in);
-			}*/
+			/*
+			 * int entityCount = in.readInt();
+			 * 
+			 * for (int j = 0; j < entityCount; j++) { Entity e = new
+			 * Entity(section); if (in.readBoolean())
+			 * world.setLocalPlayer((EntityPlayer) e); e.load(in); }
+			 */
 
 			world.addSection(section);
 		}

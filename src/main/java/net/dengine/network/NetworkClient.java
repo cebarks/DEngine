@@ -29,6 +29,7 @@ public class NetworkClient implements Runnable {
 		(controlThread = new Thread(this)).start();
 	}
 
+	@Override
 	public void run() {
 
 		try {

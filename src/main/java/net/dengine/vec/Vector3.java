@@ -79,12 +79,18 @@ public class Vector3 implements Serializable {
 	public Vector3 invert() {
 		return new Vector3(z, -y, x);
 	}
-	
+
 	public Vector3 negative() {
 		return new Vector3(-x, -y, -z);
 	}
-	
+
+	@Override
 	public String toString() {
-		return "x : " + x + ". y : " + y + ". z : " + z;
+		return String.format("x:%f y:%f z:%f", x, y, z);
+	}
+
+	public static float distanceBetweenPointToLine(Vector3 A, Vector3 B, Vector3 P) {
+		float normalLength = (float) Math.sqrt((B.x - A.x) * (B.x - A.x) + (B.z - A.z) * (B.z - A.z));
+		return Math.abs((P.x - A.x) * (B.z - A.z) - (P.z - A.z) * (B.x - A.x)) / normalLength;
 	}
 }

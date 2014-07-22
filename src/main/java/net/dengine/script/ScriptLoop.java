@@ -12,6 +12,6 @@ public class ScriptLoop {
 	}
 
 	public void run() {
-		
+
 	}
 }
