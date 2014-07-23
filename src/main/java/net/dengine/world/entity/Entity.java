@@ -9,7 +9,6 @@ public class Entity {
 	public float y;
 	public float z;
 
-	protected Vector3 previous;
 	protected Vector3 normal;
 
 	protected final World world;

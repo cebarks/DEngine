@@ -1,8 +1,6 @@
 package net.dengine.world.entity;
 
 import net.dengine.vec.Vector3;
-import net.dengine.world.Section;
-import net.dengine.world.Wall;
 import net.dengine.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -16,7 +14,7 @@ public class EntityPlayer extends EntityLiving {
 	public EntityPlayer(World world, String name) {
 		super(world);
 		this.name = name;
-		previous = position;
+		
 		normal = new Vector3(0, 0, 1);
 	}
 
@@ -24,20 +22,6 @@ public class EntityPlayer extends EntityLiving {
 	public void update() {
 		super.update();
 		Display.setTitle(String.format("DEngine demo | x:%f y:%f z:%f", position.x, position.y, position.z));
-		collision();
-	}
-
-	private void collision() {
-		for (Section s : world.getSections()) {
-			for (Wall w : s.getWalls()) {
-				float previousDistance = distanceBetweenPointToLine(new Vector3(-w.start.x, w.start.y, -w.start.z), new Vector3(-w.end.x, w.end.y, -w.end.z), previous);
-				float positionDistance = distanceBetweenPointToLine(new Vector3(-w.start.x, w.start.y, -w.start.z), new Vector3(-w.end.x, w.end.y, -w.end.z), position);
-				float delta = Math.abs(previousDistance - positionDistance);
-				if (distanceBetween(position.negative(), w.start) + distanceBetween(position.negative(), w.end) < w.getLength() + 0.5f) {
-					position = new Vector3(position.x - (delta * w.normal.x), position.y - (delta * w.normal.y), position.z - (delta * w.normal.z));
-				}
-			}
-		}
 	}
 
 	public void inputUpdate() {
