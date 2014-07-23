@@ -187,15 +187,15 @@ public class DEngine implements Runnable {
 	public World loadDefaultWorld() {
 		World world = new World(this, "foo");
 		Section section = new Section(world);
-		new Wall(section, new Vector3(-10, 0, -10), new Vector3(20, 0, -40), new Vector3(1, 1, 1), "textures/test.png", 25);
-		new Wall(section, new Vector3(40, 0, -40), new Vector3(10, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
 
-		new Wall(section, new Vector3(10, 0, -10), new Vector3(40, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
-		new Wall(section, new Vector3(-40, 0, -10), new Vector3(-10, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
-		new Wall(section, new Vector3(-40, 0, 40), new Vector3(-40, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
-		new Wall(section, new Vector3(-40, 0, 40), new Vector3(-40, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
-
-		new Wall(section, new Vector3(-40, 0, 40), new Vector3(-40, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
+		new Wall(section, new Vector3(-10, 0, -10), new Vector3(20, 0, -40), new Vector3(1, 1, 1), "res/textures/test.png", 25);
+		new Wall(section, new Vector3(40, 0, -40), new Vector3(10, 0, -10), new Vector3(1, 1, 1), "res/textures/test.png", 25);
+		
+		new Wall(section, new Vector3(10, 0, -10), new Vector3(40, 0, -10), new Vector3(1, 1, 1), "res/textures/test.png", 25);
+		new Wall(section, new Vector3(40, 0, -10), new Vector3(40, 0, 40), new Vector3(1, 1, 1), "res/textures/test.png", 25);
+		new Wall(section, new Vector3(-40, 0, -10), new Vector3(-10, 0, -10), new Vector3(1, 1, 1), "res/textures/test.png", 25);
+		new Wall(section, new Vector3(-40, 0, 40), new Vector3(-40, 0, -10), new Vector3(1, 1, 1), "res/textures/test.png", 25);
+		new Wall(section, new Vector3(40, 0, 40), new Vector3(-40, 0, 40), new Vector3(1, 1, 1), "res/textures/test.png", 25);
 
 		world.addSection(section);
 		return world;

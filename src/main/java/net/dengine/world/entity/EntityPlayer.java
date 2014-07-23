@@ -10,11 +10,16 @@ import org.lwjgl.opengl.Display;
 public class EntityPlayer extends EntityLiving {
 
 	private String name;
+	private Vector3 previous;
+	private Vector3 normal;
+
+	public float speed, tick, yBob;
+	public boolean walking;
 
 	public EntityPlayer(World world, String name) {
 		super(world);
 		this.name = name;
-		
+
 		normal = new Vector3(0, 0, 1);
 	}
 
@@ -28,6 +33,18 @@ public class EntityPlayer extends EntityLiving {
 
 		previous = new Vector3(position.x, position.y, position.z);
 		speed = 0.5f;
+
+		if (yBob < 0)
+			yBob = 0;
+		if (tick < 0)
+			tick = 0;
+
+		tick += 0.15f;
+
+		yBob = (float) Math.sin(tick) / 8;
+
+		if (walking)
+			position.y += yBob;
 
 		rotation.y += Mouse.getDX() / 2;
 
