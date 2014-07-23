@@ -7,6 +7,8 @@ public class EntityLiving extends Entity {
 
 	protected Vector3 position;
 	protected Vector3 rotation;
+	public float speed;
+	public boolean walking;
 
 	public EntityLiving(World world) {
 		super(world);

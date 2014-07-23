@@ -12,12 +12,16 @@ import org.lwjgl.opengl.Display;
 public class EntityPlayer extends EntityLiving {
 
 	private String name;
+<<<<<<< HEAD
 	private Vector3 previous;
 	private Vector3 normal;
 	
 	public float speed, tick, yBob;
 	public boolean walking;
 	
+=======
+
+>>>>>>> e31990b9e16a760ce8690b417d569b136f92eb39
 	public EntityPlayer(World world, String name) {
 		super(world);
 		this.name = name;
@@ -27,25 +31,31 @@ public class EntityPlayer extends EntityLiving {
 
 	@Override
 	public void update() {
+		super.update();
 		Display.setTitle(String.format("DEngine demo | x:%f y:%f z:%f", position.x, position.y, position.z));
 		collision();
 	}
-	
+
 	private void collision() {
-		for(Section s : world.getSections()) {
-			for(Wall w : s.getWalls()) {
+		for (Section s : world.getSections()) {
+			for (Wall w : s.getWalls()) {
 				float previousDistance = distanceBetweenPointToLine(new Vector3(-w.start.x, w.start.y, -w.start.z), new Vector3(-w.end.x, w.end.y, -w.end.z), previous);
 				float positionDistance = distanceBetweenPointToLine(new Vector3(-w.start.x, w.start.y, -w.start.z), new Vector3(-w.end.x, w.end.y, -w.end.z), position);
 				float delta = Math.abs(previousDistance - positionDistance);
+<<<<<<< HEAD
 				if(distanceBetween(position.negative(), w.start) + distanceBetween(position.negative(), w.end) - 0.5f < w.getLength()) {
 					position = new Vector3(position.x - (delta * w.normal.x), position.y - (delta * w.normal.y), position.z - (delta * w.normal.z));  
+=======
+				if (distanceBetween(position.negative(), w.start) + distanceBetween(position.negative(), w.end) < w.getLength() + 0.5f) {
+					position = new Vector3(position.x - (delta * w.normal.x), position.y - (delta * w.normal.y), position.z - (delta * w.normal.z));
+>>>>>>> e31990b9e16a760ce8690b417d569b136f92eb39
 				}
 			}
 		}
 	}
 
 	public void inputUpdate() {
-		
+
 		previous = new Vector3(position.x, position.y, position.z);
 		speed = 0.5f; 
 		
@@ -64,11 +74,11 @@ public class EntityPlayer extends EntityLiving {
 			walking = true;
 			position.x -= Math.sin(rotation.y * Math.PI / 180) * speed;
 			position.z += Math.cos(rotation.y * Math.PI / 180) * speed;
-		}else if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
 			walking = true;
 			position.x -= Math.sin((rotation.y + 180) * Math.PI / 180) * speed;
 			position.z += Math.cos((rotation.y + 180) * Math.PI / 180) * speed;
-		}else {
+		} else {
 			walking = false;
 		}
 
@@ -79,15 +89,7 @@ public class EntityPlayer extends EntityLiving {
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 			position.y -= .5f;
 		}
-	
+
 	}
-	
-	private float distanceBetween(Vector3 a, Vector3 b) {
-		return (float) Math.sqrt(((a.x - b.x)*(a.x - b.x)) + ((a.z - b.z)*(a.z - b.z)));
-	}
-	
-	public float distanceBetweenPointToLine(Vector3 A, Vector3 B, Vector3 P) {
-	    float normalLength = (float)Math.sqrt((B.x-A.x)*(B.x-A.x)+(B.z-A.z)*(B.z-A.z));
-	    return Math.abs((P.x-A.x)*(B.z-A.z)-(P.z-A.z)*(B.x-A.x))/normalLength;
-	}
+
 }

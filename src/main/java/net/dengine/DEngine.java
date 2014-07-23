@@ -2,6 +2,7 @@ package net.dengine;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
 import static org.lwjgl.opengl.GL11.GL_PROJECTION;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
@@ -11,7 +12,7 @@ import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 import static org.lwjgl.opengl.GL11.glMatrixMode;
 import static org.lwjgl.opengl.GL11.glRotatef;
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glTranslatef;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
 
 import java.io.File;
@@ -21,6 +22,7 @@ import net.dengine.world.Section;
 import net.dengine.world.Wall;
 import net.dengine.world.World;
 import net.dengine.world.WorldSaveFile;
+import net.dengine.world.entity.EntityLiving;
 import net.dengine.world.entity.EntityPlayer;
 
 import org.apache.logging.log4j.LogManager;
@@ -54,26 +56,27 @@ public class DEngine implements Runnable {
 		INSTANCE = this;
 	}
 
+	@Override
 	public void run() {
 
 		LOG.info("Attempting to create DEngine...");
 
 		try {
-			
+
 			LOG.info("Creating display...");
 			Display.setDisplayMode(new DisplayMode(width, height));
-			Display.setTitle(title);			
-			Display.setVSyncEnabled(true);		
+			Display.setTitle(title);
+			Display.setVSyncEnabled(true);
 			Display.create();
 			Mouse.setGrabbed(true);
-			
+
 			LOG.info("Loading levels...");
-			//if (new File("foo").exists())
-				//world = loadWorld("foo");
-			//else
-				world = loadDefaultWorld();
+			// if (new File("foo").exists())
+			// world = loadWorld("foo");
+			// else
+			world = loadDefaultWorld();
 			LOG.info("Creating levels...");
-			//for(World w : worlds) w.create();
+			// for(World w : worlds) w.create();
 			world.create();
 
 			LOG.info("Creating player...");
@@ -121,27 +124,27 @@ public class DEngine implements Runnable {
 		glEnable(GL_DEPTH_TEST);
 		glLoadIdentity();
 
-		EntityPlayer player = world.getLocalPlayer();
+		EntityLiving player = world.getLocalPlayer();
 		glRotatef(player.getRotation().y, 0, 1, 0);
 		glTranslatef(player.getPosition().x, -player.getPosition().y, player.getPosition().z);
 
 		world.render3D();
 
-		//glPushMatrix();
-		//glMatrixMode(GL_PROJECTION);
-		//glLoadIdentity();
-		//glOrtho(0, Display.getWidth(), 0, Display.getHeight(), -1, 1);
-		//glMatrixMode(GL_MODELVIEW);
-		//glLoadIdentity();
+		// glPushMatrix();
+		// glMatrixMode(GL_PROJECTION);
+		// glLoadIdentity();
+		// glOrtho(0, Display.getWidth(), 0, Display.getHeight(), -1, 1);
+		// glMatrixMode(GL_MODELVIEW);
+		// glLoadIdentity();
 
-		//glBegin(GL_POINTS);
-		//glColor3f(1, 1, 1);
-		//glVertex2f(player.getPosition().x, -player.getPosition().z);
-		//glEnd();
+		// glBegin(GL_POINTS);
+		// glColor3f(1, 1, 1);
+		// glVertex2f(player.getPosition().x, -player.getPosition().z);
+		// glEnd();
 
-		//world.render2D();
+		// world.render2D();
 
-		//glPopMatrix();
+		// glPopMatrix();
 	}
 
 	public void exit(int status) {
@@ -171,7 +174,7 @@ public class DEngine implements Runnable {
 
 	public void start() {
 		running = true;
-		controlThread = new Thread(this);
+		controlThread = new Thread(this, "DEngine:Main");
 		controlThread.start();
 	}
 
@@ -184,6 +187,7 @@ public class DEngine implements Runnable {
 	public World loadDefaultWorld() {
 		World world = new World(this, "foo");
 		Section section = new Section(world);
+
 		new Wall(section, new Vector3(-10, 0, -10), new Vector3(20, 0, -40), new Vector3(1, 1, 1), "res/textures/test.png", 25);
 		new Wall(section, new Vector3(40, 0, -40), new Vector3(10, 0, -10), new Vector3(1, 1, 1), "res/textures/test.png", 25);
 		
@@ -192,8 +196,17 @@ public class DEngine implements Runnable {
 		new Wall(section, new Vector3(-40, 0, -10), new Vector3(-10, 0, -10), new Vector3(1, 1, 1), "res/textures/test.png", 25);
 		new Wall(section, new Vector3(-40, 0, 40), new Vector3(-40, 0, -10), new Vector3(1, 1, 1), "res/textures/test.png", 25);
 		new Wall(section, new Vector3(40, 0, 40), new Vector3(-40, 0, 40), new Vector3(1, 1, 1), "res/textures/test.png", 25);
-		
-		
+
+		new Wall(section, new Vector3(-10, 0, -10), new Vector3(20, 0, -40), new Vector3(1, 1, 1), "textures/test.png", 25);
+		new Wall(section, new Vector3(40, 0, -40), new Vector3(10, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
+
+		new Wall(section, new Vector3(10, 0, -10), new Vector3(40, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
+		new Wall(section, new Vector3(-40, 0, -10), new Vector3(-10, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
+		new Wall(section, new Vector3(-40, 0, 40), new Vector3(-40, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
+		new Wall(section, new Vector3(-40, 0, 40), new Vector3(-40, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
+
+		new Wall(section, new Vector3(-40, 0, 40), new Vector3(-40, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
+
 		world.addSection(section);
 		return world;
 	}
