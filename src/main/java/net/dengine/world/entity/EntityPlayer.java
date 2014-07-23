@@ -1,9 +1,5 @@
 package net.dengine.world.entity;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5bafe739726af417cf1f6622a77bb694fce0f128
 import net.dengine.vec.Vector3;
 import net.dengine.world.Section;
 import net.dengine.world.Wall;
@@ -19,7 +15,7 @@ public class EntityPlayer extends EntityLiving {
 	private Vector3 previous;
 	private Vector3 normal;
 	
-	public float speed;
+	public float speed, tick, yBob;
 	public boolean walking;
 	
 	public EntityPlayer(World world, String name) {
@@ -41,7 +37,7 @@ public class EntityPlayer extends EntityLiving {
 				float previousDistance = distanceBetweenPointToLine(new Vector3(-w.start.x, w.start.y, -w.start.z), new Vector3(-w.end.x, w.end.y, -w.end.z), previous);
 				float positionDistance = distanceBetweenPointToLine(new Vector3(-w.start.x, w.start.y, -w.start.z), new Vector3(-w.end.x, w.end.y, -w.end.z), position);
 				float delta = Math.abs(previousDistance - positionDistance);
-				if(distanceBetween(position.negative(), w.start) + distanceBetween(position.negative(), w.end) < w.getLength() + 0.5f) {
+				if(distanceBetween(position.negative(), w.start) + distanceBetween(position.negative(), w.end) - 0.5f < w.getLength()) {
 					position = new Vector3(position.x - (delta * w.normal.x), position.y - (delta * w.normal.y), position.z - (delta * w.normal.z));  
 				}
 			}
@@ -51,7 +47,16 @@ public class EntityPlayer extends EntityLiving {
 	public void inputUpdate() {
 		
 		previous = new Vector3(position.x, position.y, position.z);
-		speed = 0.5f;
+		speed = 0.5f; 
+		
+		if(yBob < 0) yBob = 0;
+		if(tick < 0) tick = 0;
+		
+		tick += 0.15f;
+		
+		yBob = (float) Math.sin(tick) / 8;
+		
+		if(walking) position.y += yBob;
 
 		rotation.y += Mouse.getDX() / 2;
 
