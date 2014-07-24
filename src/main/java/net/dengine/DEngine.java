@@ -1,18 +1,6 @@
 package net.dengine;
 
-import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
-import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
-import static org.lwjgl.opengl.GL11.GL_PROJECTION;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.glClear;
-import static org.lwjgl.opengl.GL11.glClearColor;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glLoadIdentity;
-import static org.lwjgl.opengl.GL11.glMatrixMode;
-import static org.lwjgl.opengl.GL11.glRotatef;
-import static org.lwjgl.opengl.GL11.glTranslatef;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
 
 import java.io.File;
@@ -31,6 +19,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.PixelFormat;
 
 public class DEngine implements Runnable {
 
@@ -67,7 +56,8 @@ public class DEngine implements Runnable {
 			Display.setDisplayMode(new DisplayMode(width, height));
 			Display.setTitle(title);
 			Display.setVSyncEnabled(true);
-			Display.create();
+			//Use 8x MSAA :D
+			Display.create(new PixelFormat(8, 0, 2, 8));
 			Mouse.setGrabbed(true);
 
 			LOG.info("Loading levels...");
@@ -188,14 +178,14 @@ public class DEngine implements Runnable {
 		World world = new World(this, "foo");
 		Section section = new Section(world);
 
-		new Wall(section, new Vector3(-10, 0, -10), new Vector3(20, 0, -40), new Vector3(1, 1, 1), "res/textures/test.png", 25);
-		new Wall(section, new Vector3(40, 0, -40), new Vector3(10, 0, -10), new Vector3(1, 1, 1), "res/textures/test.png", 25);
+		new Wall(section, new Vector3(-10, 0, -10), new Vector3(20, 0, -40), new Vector3(1, 1, 1), "textures/test.png", 25);
+		new Wall(section, new Vector3(40, 0, -40), new Vector3(10, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
 		
-		new Wall(section, new Vector3(10, 0, -10), new Vector3(40, 0, -10), new Vector3(1, 1, 1), "res/textures/test.png", 25);
-		new Wall(section, new Vector3(40, 0, -10), new Vector3(40, 0, 40), new Vector3(1, 1, 1), "res/textures/test.png", 25);
-		new Wall(section, new Vector3(-40, 0, -10), new Vector3(-10, 0, -10), new Vector3(1, 1, 1), "res/textures/test.png", 25);
-		new Wall(section, new Vector3(-40, 0, 40), new Vector3(-40, 0, -10), new Vector3(1, 1, 1), "res/textures/test.png", 25);
-		new Wall(section, new Vector3(40, 0, 40), new Vector3(-40, 0, 40), new Vector3(1, 1, 1), "res/textures/test.png", 25);
+		new Wall(section, new Vector3(10, 0, -10), new Vector3(40, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
+		new Wall(section, new Vector3(40, 0, -10), new Vector3(40, 0, 40), new Vector3(1, 1, 1), "textures/test.png", 25);
+		new Wall(section, new Vector3(-40, 0, -10), new Vector3(-10, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
+		new Wall(section, new Vector3(-40, 0, 40), new Vector3(-40, 0, -10), new Vector3(1, 1, 1), "textures/test.png", 25);
+		new Wall(section, new Vector3(40, 0, 40), new Vector3(-40, 0, 40), new Vector3(1, 1, 1), "textures/test.png", 25);
 
 		world.addSection(section);
 		return world;
